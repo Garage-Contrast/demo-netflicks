@@ -40,7 +40,7 @@ spec:
         app: netflicks
     spec:
       containers:
-      - name: netflicks-db
+      - name: db
         image: mcr.microsoft.com/mssql/server:2019-latest
         ports:
         - containerPort: 1433
