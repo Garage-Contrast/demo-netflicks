@@ -13,7 +13,8 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS final
 RUN uname -a
 RUN apt-get update && apt-get --assume-yes install libnss3-tools
 WORKDIR /app
-EXPOSE 80
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://*:8080
 COPY --from=publish /app .
 
 ENTRYPOINT ["dotnet", "DotNetFlicks.Web.dll"]

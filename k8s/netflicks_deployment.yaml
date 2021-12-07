@@ -22,7 +22,7 @@ spec:
   ports:
     - name: "netflicks"
       port: 8080
-      targetPort: 80
+      targetPort: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -52,7 +52,7 @@ spec:
       - name: netflicks
         image: contrastsecuritydemo/netflicks:k8s
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         env: 
         - name: ConnectionStrings__DotNetFlicksConnection
           value: "Server=tcp:localhost,1433;Initial Catalog=DotNetFlicksDb;Persist Security Info=False;User ID=sa;Password=reallyStrongPwd123;MultipleActiveResultSets=False;"
