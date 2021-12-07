@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: netflicks-db-service
+  name: db-service
 spec:
   selector:
-    app: netflicks-db
+    app: db
   ports:
     - protocol: TCP
       port: 1433
@@ -15,9 +15,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: netflicks-controller-svc
+  name: netflicks
 spec:
-  type: LoadBalancer
   selector:
     app: netflicks
   ports:
@@ -54,17 +53,6 @@ spec:
         image: contrastsecuritydemo/netflicks:k8s
         ports:
         - containerPort: 80
-        envFrom:
-        - configMapRef:
-            name: contrast-config 
-        volumeMounts:
-        - name: contrast-security
-          readOnly: false
-          mountPath: "/etc/contrast/"
         env: 
         - name: ConnectionStrings__DotNetFlicksConnection
           value: "Server=tcp:localhost,1433;Initial Catalog=DotNetFlicksDb;Persist Security Info=False;User ID=sa;Password=reallyStrongPwd123;MultipleActiveResultSets=False;"
-      volumes:
-      - name: contrast-security
-        secret:
-          secretName: contrast-security
