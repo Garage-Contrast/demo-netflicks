@@ -28,7 +28,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: netflicks-controller
+  name: netflicks
 spec:
   replicas: 1
   selector:
