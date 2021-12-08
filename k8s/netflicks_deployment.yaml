@@ -56,3 +56,18 @@ spec:
         env: 
         - name: ConnectionStrings__DotNetFlicksConnection
           value: "Server=tcp:localhost,1433;Initial Catalog=DotNetFlicksDb;Persist Security Info=False;User ID=sa;Password=reallyStrongPwd123;MultipleActiveResultSets=False;"
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: netflicks
+spec:
+  tls:
+    termination: edge
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: netflicks
+    weight: 100
+  wildcardPolicy: None
