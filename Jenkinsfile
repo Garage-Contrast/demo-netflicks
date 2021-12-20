@@ -164,7 +164,7 @@ EOF
         }
         container('yq') {
           sh '''
-cd manifests
+cd k8s
 RESOURCES=$(ls)
 echo 'resources:' | tee -a kustomization-template.yaml
 for res in $RESOURCES ;
@@ -197,7 +197,7 @@ EOF
 '''
         }
         container('openshift') {
-          sh "cd manifests && APP_NAME=${env.APP_NAME} NAMESPACE=${env.PROJECT} GIT_COMMIT=${env.GIT_COMMIT} envsubst '\$APP_NAME,\$NAMESPACE,\$GIT_COMMIT' < \"kustomization-template.yaml\" > \"kustomization.yaml\""
+          sh "cd k8s && APP_NAME=${env.APP_NAME} NAMESPACE=${env.PROJECT} GIT_COMMIT=${env.GIT_COMMIT} envsubst '\$APP_NAME,\$NAMESPACE,\$GIT_COMMIT' < \"kustomization-template.yaml\" > \"kustomization.yaml\""
         }
       }
     }
@@ -207,10 +207,10 @@ EOF
           script {
             openshift.withCluster() {
               openshift.withProject() {
-                sh "ls -lah manifests/"
-                sh "cat manifests/kustomization.yaml"
-                sh "oc kustomize manifests"
-                sh "oc kustomize manifests | oc apply -f -"
+                sh "ls -lah k8s/"
+                sh "cat k8s/kustomization.yaml"
+                sh "oc kustomize k8s"
+                sh "oc kustomize k8s | oc apply -f -"
               }
             }
           }
