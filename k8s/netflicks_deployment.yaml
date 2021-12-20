@@ -65,7 +65,7 @@ spec:
   tls:
     termination: edge
   port:
-    targetPort: http
+    targetPort: netflicks
   to:
     kind: Service
     name: netflicks
