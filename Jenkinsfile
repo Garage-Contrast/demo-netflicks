@@ -82,7 +82,7 @@ metadata:
 spec:
   source:
     dockerfile: |
-      FROM please/replace/this:latest
+      FROM ubuntu:bionic AS contrast
 
       ENV DEBIAN_FRONTEND=noninteractive
 
@@ -93,7 +93,7 @@ spec:
           && unzip /tmp/contrast.sensorsnetcore.nupkg -d /tmp/contrast \
           && rm /tmp/contrast.sensorsnetcore.nupkg
       
-      FROM $(params.IMAGE)-intermediate
+      FROM please/replace/this:latest
 
       COPY --from=contrast /tmp/contrast /opt/contrast 
       #Set the environment vars to enable the agent
