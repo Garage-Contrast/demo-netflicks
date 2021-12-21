@@ -190,9 +190,9 @@ patchesStrategicMerge:
           - name: ${APP_NAME}
             envFrom:
             - configMapRef:
-                name: contrast-cm
+                name: contrast-cm-${APP_NAME}
             - secretRef:
-                name: contrast-secret
+                name: contrast-secret-${APP_NAME}
 EOF
 '''
         }
