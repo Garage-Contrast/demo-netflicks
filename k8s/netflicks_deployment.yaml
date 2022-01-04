@@ -25,6 +25,7 @@ spec:
     metadata:
       labels:
         app: db
+        app.kubernetes.io/instance: netflicks-db
     spec:
       containers:
       - name: db
@@ -65,6 +66,8 @@ spec:
       app: netflicks
   template:
     metadata:
+      annotations:
+        app.openshift.io/connects-to: netflicks-db
       labels:
         app: netflicks
     spec:
