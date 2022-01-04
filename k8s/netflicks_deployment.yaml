@@ -16,6 +16,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: db
+  labels:
+    app.kubernetes.io/instance: netflicks-db
 spec:
   replicas: 1
   selector:
@@ -25,7 +27,6 @@ spec:
     metadata:
       labels:
         app: db
-        app.kubernetes.io/instance: netflicks-db
     spec:
       containers:
       - name: db
@@ -59,6 +60,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: netflicks
+  annotations:
+    app.openshift.io/connects-to: netflicks-db
 spec:
   replicas: 1
   selector:
@@ -66,8 +69,6 @@ spec:
       app: netflicks
   template:
     metadata:
-      annotations:
-        app.openshift.io/connects-to: netflicks-db
       labels:
         app: netflicks
     spec:
